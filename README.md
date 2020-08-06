@@ -14,6 +14,14 @@ SchNet: A continuous-filter convolutional neural network for modeling quantum in
   year={2019}
 }
 ```
+## Dependencies  
+
++ PyTorch 
++ dgl 
++ RDKit
++ Numpy
++ Pandas
++ argparse
 
 ## Usage:
 
