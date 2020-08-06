@@ -18,11 +18,11 @@ SchNet: A continuous-filter convolutional neural network for modeling quantum in
 ## Usage:
 
 ### How to preprocess the dataset:
-python dataset_split.py --dataset ./DATA/C_NMR/C-NMR
+`python dataset_split.py --dataset ./DATA/C_NMR/C-NMR`
 
 
 ### How to train the model: 
-python train_qm.py --model sch_qm --epochs 20000 --train_file ./DATA/F_NMR/F_NMR_train.csv --test_file ./DATA/F_NMR/F_NMR_valid.csv --save result_app_F
+`python train_qm.py --model sch_qm --epochs 20000 --train_file ./DATA/F_NMR/F_NMR_train.csv --test_file ./DATA/F_NMR/F_NMR_valid.csv --save result_app_F`
 
 
 
