@@ -18,8 +18,6 @@ from torch.utils.data import DataLoader
 import pathlib
 import pandas as pd
 import numpy as np
-_urls = {'Alchemy': 'https://alchemy.tencent.com/data/'}
-
 
 class AlchemyBatcher:
     def __init__(self, graph=None, label=None, mask=None, qm=None):

@@ -7,22 +7,17 @@ import argparse
 import torch as th
 import torch.nn as nn
 from sch import SchNetModel
-from mgcn import MGCNModel
-from mpnn import MPNNModel
 from torch.utils.data import DataLoader
 from Alchemy_dataset import TencentAlchemyDataset, batcher
 
 
-mean = -3.0734363
-std = 2.114991
 
-
-def dataset_split(file):
-    delaney = pd.read_csv("delaney.csv")
-    test_set = delaney.sample(frac=0.1, random_state=0)
-    train_set = delaney.drop(test_set.index)
-    test_set.to_csv("delaney_test.csv", index=False)
-    train_set.to_csv("delaney_train.csv", index=False)
+# def dataset_split(file):
+#     delaney = pd.read_csv("delaney.csv")
+#     test_set = delaney.sample(frac=0.1, random_state=0)
+#     train_set = delaney.drop(test_set.index)
+#     test_set.to_csv("delaney_test.csv", index=False)
+#     train_set.to_csv("delaney_train.csv", index=False)
 
 
 def eval(model="sch", epochs=80, device=th.device("cpu"), train_dataset='',eval_dataset='', epoch=1):
@@ -46,12 +41,8 @@ def eval(model="sch", epochs=80, device=th.device("cpu"), train_dataset='',eval_
 
     if model == "sch":
         model = SchNetModel(norm=False, output_dim=1)
-    elif model == "mgcn":
-        model = MGCNModel(norm=False, output_dim=1)
-    elif model == "MPNN":
-        model = MPNNModel(output_dim=1)
     print(model)
-    # if model.name in ["MGCN", "SchNet"]:
+    # if model.name in ["SchNet"]:
     #     model.set_mean_std(mean, std, device)
     model.load_state_dict(th.load('./' + train_dataset + "/model_" + str(epoch)))
     model.to(device)

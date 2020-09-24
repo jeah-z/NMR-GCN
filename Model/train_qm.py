@@ -7,8 +7,6 @@ import argparse
 import torch as th
 import torch.nn as nn
 from sch_qm import SchNetModel
-from mgcn import MGCNModel
-from mpnn import MPNNModel
 from torch.utils.data import DataLoader
 from Alchemy_dataset_qm import TencentAlchemyDataset, batcher
 from torch.nn import init
@@ -29,12 +27,12 @@ def initNetParams(net):
             # if m.bias:
             #     init.constant(m.bias, 0)
 
-def dataset_split(file):
-    delaney = pd.read_csv("delaney.csv")
-    test_set = delaney.sample(frac=0.1, random_state=0)
-    train_set = delaney.drop(test_set.index)
-    test_set.to_csv("delaney_test.csv", index=False)
-    train_set.to_csv("delaney_train.csv", index=False)
+# def dataset_split(file):
+#     delaney = pd.read_csv("delaney.csv")
+#     test_set = delaney.sample(frac=0.1, random_state=0)
+#     train_set = delaney.drop(test_set.index)
+#     test_set.to_csv("delaney_test.csv", index=False)
+#     train_set.to_csv("delaney_train.csv", index=False)
 
 
 def train(model="sch", epochs=80, device=th.device("cpu"), train_file='', test_file='',save=''):
@@ -72,10 +70,7 @@ def train(model="sch", epochs=80, device=th.device("cpu"), train_file='', test_f
 
     if model == "sch_qm":
         model = SchNetModel(norm=False, output_dim=1)
-    elif model == "mgcn":
-        model = MGCNModel(norm=False, output_dim=1)
-    elif model == "MPNN":
-        model = MPNNModel(output_dim=1)
+
     print(model)
     # if model.name in ["MGCN", "SchNet"]:
     #     model.set_mean_std(alchemy_dataset.mean, alchemy_dataset.std, device)
@@ -162,7 +157,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-M",
                         "--model",
-                        help="model name (sch, mgcn or MPNN)",
+                        help="model name (sch_qm)",
                         default="sch")
     parser.add_argument("--epochs", help="number of epochs", default=10000)
     parser.add_argument("--train_file", help="dataset to train", default="")
@@ -170,6 +165,6 @@ if __name__ == "__main__":
     parser.add_argument("--save", help="save option", default="")
     device = th.device('cuda:0' if th.cuda.is_available() else 'cpu')
     args = parser.parse_args()
-    assert args.model in ["sch_qm", "mgcn", "MPNN"]
+    assert args.model in ["sch_qm"]
     # dataset_split("delaney.csv")
     train(args.model, int(args.epochs), device, args.train_file, args.test_file, args.save)
