@@ -6,9 +6,9 @@ import pandas as pd
 import argparse
 import torch as th
 import torch.nn as nn
-from sch_qm import SchNetModel
+from Model.sch_qm import SchNetModel
 from torch.utils.data import DataLoader
-from Alchemy_dataset_qm import TencentAlchemyDataset, batcher
+from Model.Alchemy_dataset_qm import TencentAlchemyDataset, batcher
 from torch.nn import init
 
 def initNetParams(net):
@@ -76,7 +76,7 @@ def train(model="sch", epochs=80, device=th.device("cpu"), train_file='', test_f
     #     model.set_mean_std(alchemy_dataset.mean, alchemy_dataset.std, device)
     model.to(device)
     initNetParams(model)
-    model.load_state_dict(th.load('./C_qm/model_100'))
+    model.load_state_dict(th.load('saved_model/model_C_100'))
     # print("test_dataset.mean= %s" % (alchemy_dataset.mean))
     # print("test_dataset.std= %s" % (alchemy_dataset.std))
 

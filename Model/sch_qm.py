@@ -3,7 +3,7 @@
 import dgl
 import torch as th
 import torch.nn as nn
-from layers import AtomEmbedding, Interaction, ShiftSoftplus, RBFLayer
+from .layers import AtomEmbedding, Interaction, ShiftSoftplus, RBFLayer
 from torch.nn import init
 
 

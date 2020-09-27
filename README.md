@@ -30,7 +30,10 @@ SchNet: A continuous-filter convolutional neural network for modeling quantum in
 
 
 ### How to train the model: 
-`python train_qm.py --model sch_qm --epochs 20000 --train_file ./DATA/F_NMR/F_NMR_train.csv --test_file ./DATA/F_NMR/F_NMR_valid.csv --save result_app_F`
+`python train_qm.py --model sch_qm --epochs 10000 --train_file ./DATA/C_NMR/C-NMR_train.csv --test_file ./DATA/C_NMR/C-NMR_valid.csv --save saved_model/C-C`
+
+### How to eval the model: 
+`python eval.py -M sch_qm -S saved_model/N-N/model_200 -E DATA/N_NMR/N-NMR_valid.csv`
 
 
 
